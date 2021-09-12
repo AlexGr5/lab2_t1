@@ -254,5 +254,70 @@ int out_Class_(Class_& cl, int fl_out)
 
 int main()
 {
-    ;
+    setlocale(LC_ALL, "Russian");
+    system("chcp 1251");
+    system("cls");
+    
+    cout << "===================================================" << endl;
+    Teacher t_Chem;
+    Teacher *t_Biology = new Teacher;
+    
+    init_t(t_Chem);
+    init_t(*t_Biology);
+
+    cout << "Введите ФИО 2-ух учителей:" << endl;
+    cout << endl;
+    inp_Teach(t_Chem);
+    out_Teach(t_Chem);
+
+    cout << endl;
+
+    inp_Teach(*t_Biology);
+    out_Teach(*t_Biology);
+    cout << "===================================================" << endl;
+
+    cout << endl;
+    cout << endl;
+
+    cout << "===================================================" << endl;
+    Lessons Chem;
+    Lessons* Biology = new Lessons;
+
+    init_l(Chem);
+    init_l(*Biology);
+
+    cout << "Введите 2 урока:" << endl;
+    cout << endl;
+    cout << "Для учителя - ";
+    out_Teach(t_Chem);
+    inp_Less(Chem, t_Chem);
+    cout << "Вывод:" << endl;
+    out_Less(Chem);
+
+    cout << endl;
+
+    cout << "Для учителя - ";
+    out_Teach(*t_Biology);
+    inp_Less(*Biology, *t_Biology);
+    cout << "Вывод:" << endl;
+    out_Less(*Biology);
+    cout << "===================================================" << endl;
+
+    cout << endl;
+    cout << endl;
+
+    cout << "===================================================" << endl;
+    Student st1;
+    Student* st2 = new Student;
+    Student st3;
+
+    init_s(st1);
+    init_s(*st2);
+    init_s(st3);
+
+    cout << "Введите 3 ученика:" << endl;
+    cout << endl;
+    //inp_Stud(st1);
+    cout << "===================================================" << endl;
+
 }
