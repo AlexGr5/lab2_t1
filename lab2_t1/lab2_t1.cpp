@@ -63,7 +63,13 @@ int inp_Teach(Teacher &t)
     return 0;
 }
 
+// Ввод учителя, передаем адрес, где будет храниться информация
+int out_Teach(Teacher& t)
+{
+    cout << "ФИО учителя: " << t.Fam << " " << t.Name << " " << t.Otch << endl;
 
+    return 0;
+}
 
 
 void init_l(Lessons& ls)
@@ -85,6 +91,14 @@ int inp_Less(Lessons &ls, Teacher &t)
     return 0;
 }
 
+// Вывод уроков, передаем адрес, где будет храниться информация
+int out_Less(Lessons& ls)
+{
+    cout << "Название предмета: " << ls.Name << endl;
+    out_Teach(ls.Teach);
+
+    return 0;
+}
 
 void init_m(Mark& m)
 {
@@ -102,6 +116,12 @@ int inp_Mark(Mark& m)
     return 0;
 }
 
+int out_Mark(Mark& m)
+{
+    cout << "Оценка: " << m.Value << endl;
+
+    return 0;
+}
 
 void init_s(Student& st)
 {
@@ -145,6 +165,37 @@ int inp_Stud(Student &st, Mark *mas_m[20], Lessons *mas_l[20])
     return 0;
 }
 
+// Вывод ученика
+// Передаем ученика и флаг для различного вывода уроков и оценок
+// fl_out (0 или 1)
+int out_Stud(Student& st, int fl_out)
+{
+    cout << "ФИО ученика: " << st.Fam << " " << st.Name << " " << st.Otch << endl;
+
+    if (fl_out == 0)
+    {
+        cout << "Уроки:" << endl;
+        for (int i = 0; i < 20; i++)
+        {
+            out_Less(st.mas_Less[i]);
+        }
+        cout << "Оценки:" << endl;
+        for (int i = 0; i < 20; i++)
+        {
+            st.mas_Marks[i];
+        }
+    }
+    else
+    {
+        cout << "Уроки:" << endl;
+        for (int i = 0; i < 20; i++)
+        {
+            cout << " * " << st.mas_Less[i].Name << " * " << st.mas_Marks->Value << " * " << endl;
+        }
+    }
+
+    return 0;
+}
 
 void init_c(Class_& cl)
 {
@@ -175,6 +226,31 @@ int inp_Class_(Class_ &cl, Student *mas[32])
     return 0;
 }
 
+// fl_out (0 или 1)
+int out_Class_(Class_& cl, int fl_out)
+{
+    cout << "Название класса: " << cl.Name << endl;;
+    cout << "Год обучения: " << cl.year << endl;
+    cout << endl;
+    cout << "Ученики:" << endl;
+
+    if (fl_out == 0)
+    {
+        for (int i = 0; i < 32; i++)
+        {
+            out_Stud(cl.mas_Stud[i], 0);
+        }
+    }
+    else
+    {
+        for (int i = 0; i < 32; i++)
+        {
+            out_Stud(cl.mas_Stud[i], 1);
+        }
+    }
+
+    return 0;
+}
 
 int main()
 {
