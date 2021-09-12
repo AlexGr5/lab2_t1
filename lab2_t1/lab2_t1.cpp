@@ -43,6 +43,12 @@ struct Class_
 };
 
 
+void init_t(Teacher& t)
+{
+    t.Fam  = "";
+    t.Name = "";
+    t.Otch = "";
+}
 
 // Ввод учителя, передаем адрес, где будет храниться информация
 int inp_Teach(Teacher &t)
@@ -58,6 +64,16 @@ int inp_Teach(Teacher &t)
 }
 
 
+
+
+void init_l(Lessons& ls)
+{
+    ls.Name = "";
+    Teacher t;
+    init_t(t);
+    ls.Teach = t;
+}
+
 // Ввод уроков, передаем адрес, где будет храниться информация и адрес учителя
 int inp_Less(Lessons &ls, Teacher &t)
 {
@@ -70,6 +86,11 @@ int inp_Less(Lessons &ls, Teacher &t)
 }
 
 
+void init_m(Mark& m)
+{
+    m.Value = 0;
+}
+
 int inp_Mark(Mark& m)
 {
     string mark;
@@ -81,13 +102,26 @@ int inp_Mark(Mark& m)
     return 0;
 }
 
-int out_Mark(Mark& m)
+
+void init_s(Student& st)
 {
-    cout << "Оценка: " << m.Value << endl;
+    st.Fam = "";
+    st.Name = "";
+    st.Otch = "";
+    Lessons L;
+    Mark M;
+    init_l(L);
+    init_m(M);
+    for (int i = 0; i < 20; i++)
+    {
+        st.mas_Less[i] = L;
+    }
 
-    return 0;
+    for (int i = 0; i < 20; i++)
+    {
+        st.mas_Marks[i] = M;
+    }
 }
-
 
 int inp_Stud(Student &st, Mark *mas_m[20], Lessons *mas_l[20])
 {
@@ -112,6 +146,18 @@ int inp_Stud(Student &st, Mark *mas_m[20], Lessons *mas_l[20])
 }
 
 
+void init_c(Class_& cl)
+{
+    cl.Name = "";
+    cl.year = "";
+    Student S;
+    init_s(S);
+    for (int i = 0; i < 32; i++)
+    {
+        cl.mas_Stud[i] = S;
+    }
+}
+
 int inp_Class_(Class_ &cl, Student *mas[32])
 {
     cout << "Введите название класса: ";
@@ -128,7 +174,6 @@ int inp_Class_(Class_ &cl, Student *mas[32])
 
     return 0;
 }
-
 
 
 int main()
