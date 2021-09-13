@@ -674,6 +674,9 @@ int main()
     Class_ cl1;
     Class_* cl2 = new Class_;
 
+    init_c(cl1);
+    init_c(*cl2);
+
     cout << "Введите данные для первого класса" << endl;
     inp_Class_(cl1);
     cout << endl;
@@ -732,6 +735,9 @@ int main()
     else
         cout << "Ученик не добавлен!" << endl;
     cout << endl;
+    cout << endl;
+    cout << "Вывод класаа №2" << endl;
+    out_Class_(cl1, 1);
 
     cout << endl;
     cout << endl;
@@ -796,6 +802,11 @@ int main()
     else
         cout << "Ученик не добавлен!" << endl;
     cout << endl;
+    cout << endl;
+    cout << "Вывод класаа №2" << endl;
+    cout << endl;
+    out_Class_(*cl2, 1);
+
     cout << "===================================================" << endl;
     
 
