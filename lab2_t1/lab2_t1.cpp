@@ -33,6 +33,7 @@ struct Student
     string Otch;            // Отчество
     Mark mas_Marks[20];     // Массив оценок
     Lessons mas_Less[20];   // Массив уроков
+    int i;                  // Текущее кол-во уроков
 };
 
 struct Class_
@@ -132,6 +133,7 @@ void init_s(Student& st)
     Mark M;
     init_l(L);
     init_m(M);
+    st.i = 0;
     for (int i = 0; i < 20; i++)
     {
         st.mas_Less[i] = L;
@@ -165,6 +167,52 @@ int inp_Stud(Student &st, Mark *mas_m[20], Lessons *mas_l[20])
     return 0;
 }
 
+int add_Less_to_Stud(Student& st, Lessons& ls)
+{
+    int fl = 0;
+
+    for (int i = 0; (i < 20) && (fl == 0); i++)
+    {
+        if (st.mas_Less[i].Name == "")
+        {
+            st.mas_Less[i] = ls;
+            fl = 1;
+        }
+    }
+
+    return fl;
+}
+
+int add_LM_to_Stud(Student& st, Lessons& ls, Mark &m)
+{
+    int fl = 0;
+
+    for (int i = 0; (i < 20) && (fl == 0); i++)
+    {
+        if (st.mas_Less[i].Name == "")
+        {
+            st.mas_Less[i] = ls;
+            st.mas_Marks[i] = m;
+            fl = 1;
+        }
+    }
+
+    return fl;
+}
+
+int add_Mark_to_Stud(Student& st, Mark &m, int n)
+{
+    int fl = 0;
+
+    if (st.mas_Less[n].Name != "")
+    {
+        st.mas_Marks[n] = m;
+        fl = 1;
+    }
+
+    return fl;
+}
+
 // Вывод ученика
 // Передаем ученика и флаг для различного вывода уроков и оценок
 // fl_out (0 или 1)
@@ -196,6 +244,7 @@ int out_Stud(Student& st, int fl_out)
 
     return 0;
 }
+
 
 void init_c(Class_& cl)
 {
