@@ -177,6 +177,19 @@ int inp_Stud(Student &st, Mark *mas_m[20], Lessons *mas_l[20])
     return 0;
 }
 
+// Ввод ФИО ученика в структуру
+int inp_FIO_Stud(Student& st)
+{
+    cout << "Введите Фамилию ученика: ";
+    cin >> st.Fam;
+    cout << "Введите Имя ученика: ";
+    cin >> st.Name;
+    cout << "Введите Отчество ученика: ";
+    cin >> st.Otch;
+
+    return 0;
+}
+
 // Добавление к ученику урока
 int add_Less_to_Stud(Student& st, Lessons& ls)
 {
@@ -393,7 +406,54 @@ int main()
 
     cout << "Введите 3 ученика:" << endl;
     cout << endl;
-    //inp_Stud(st1);
+    cout << "Первый ученик:" << endl;
+    inp_FIO_Stud(st1);
+
+    cout << endl;
+    cout << "Второй ученик:" << endl;
+    inp_FIO_Stud(*st2);
+
+    cout << endl;
+    cout << "Третий ученик:" << endl;
+    inp_FIO_Stud(st3);
+
+    cout << endl;
+    cout << "Выберите, какие уроки у первого ученика:" << endl;
+    out_Less(Chem);
+    string str = "";
+    cout << "Добавить этот предмет ученику? (д - добавить, другой набор символов - нет): ";
+    cin >> str;
+    if (str == "д")
+    {
+        if (add_Less_to_Stud(st1, Chem))
+        {
+            cout << "Урок добавлен!" << endl;
+            cout << endl;
+            cout << "Добавить оценку (1,2,3,4,5 - добавить, другой набор символов - нет):" << endl;
+            str = "";
+            cin >> str;
+            Mark mr;
+            init_m(mr);
+            mr.Value = stoi(str);
+            if ((mr.Value >= 1) || (mr.Value <= 5))
+            {
+                if (add_Mark_to_Stud(st1, Chem, mr))
+                    cout << "Оценка добавлена!" << endl;
+                else
+                    cout << "Оценка не добавлена!" << endl;
+
+            }
+        }
+        else
+            cout << "Урок не добавлен!" << endl;
+    }
+    else
+        cout << "Урок не добавлен!" << endl;
+    cout << endl;
+
+    out_Less(*Biology);
+   
+
     cout << "===================================================" << endl;
 
 }
