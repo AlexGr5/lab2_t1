@@ -45,6 +45,7 @@ struct Class_
 {
     string Name;            // Название класса
     string year;            // Год обучения
+    int i;                  // Текущее кол-во учеников
     Student mas_Stud[32];   // Массив учеников
 };
 
@@ -290,6 +291,7 @@ void init_c(Class_& cl)
 {
     cl.Name = "";
     cl.year = "";
+    cl.i = 0;
     Student S;
     init_s(S);
     for (int i = 0; i < 32; i++)
@@ -299,7 +301,7 @@ void init_c(Class_& cl)
 }
 
 // Ввод данных в структуру Класс
-int inp_Class_(Class_ &cl, Student *mas[32])
+int inp_Class_(Class_ &cl/*, Student *mas[32]*/)
 {
     cout << "Введите название класса: ";
     cin >> cl.Name;
@@ -308,12 +310,28 @@ int inp_Class_(Class_ &cl, Student *mas[32])
     cin >> cl.year;
     cout << endl;
 
+    /*
     for (int i = 0; i < 32; i++)
     {
         cl.mas_Stud[i] = *mas[i];
     }
+    */
 
     return 0;
+}
+
+// Добавление к классу ченика
+int add_St_to_Cl(Class_ &cl, Student& st)
+{
+    int fl = 0;
+    if (cl.i < 20)
+    {
+        cl.mas_Stud[cl.i] = st;
+        cl.i++;
+        fl = 1;
+    }
+
+    return fl;
 }
 
 // Выод данных из структуры Класс
@@ -646,5 +664,139 @@ int main()
    
 
     cout << "===================================================" << endl;
+
+    cout << endl;
+    cout << endl;
+
+    cout << "=======================Тест структуры Класс============================" << endl;
+    cout << "Создайте 2 класса учеников:" << endl;
+    cout << endl;
+    Class_ cl1;
+    Class_* cl2 = new Class_;
+
+    cout << "Введите данные для первого класса" << endl;
+    inp_Class_(cl1);
+    cout << endl;
+    out_Stud(st1, 1);
+    cout << "Добавить данного ученика в класс? (д - добавить, другой набор символов - нет): ";
+    str = "";
+    cin >> str;
+    if (str == "д")
+    {
+        if (add_St_to_Cl(cl1, st1))
+        {
+            cout << "Ученик добавлен!" << endl;
+            cout << endl;
+        }
+        else
+            cout << "Ученик не добавлен!" << endl;
+    }
+    else
+        cout << "Ученик не добавлен!" << endl;
+    cout << endl;
+
+    cout << endl;
+    out_Stud(*st2, 1);
+    cout << "Добавить данного ученика в класс? (д - добавить, другой набор символов - нет): ";
+    str = "";
+    cin >> str;
+    if (str == "д")
+    {
+        if (add_St_to_Cl(cl1, *st2))
+        {
+            cout << "Ученик добавлен!" << endl;
+            cout << endl;
+        }
+        else
+            cout << "Ученик не добавлен!" << endl;
+    }
+    else
+        cout << "Ученик не добавлен!" << endl;
+    cout << endl;
+
+    cout << endl;
+    out_Stud(st3, 1);
+    cout << "Добавить данного ученика в класс? (д - добавить, другой набор символов - нет): ";
+    str = "";
+    cin >> str;
+    if (str == "д")
+    {
+        if (add_St_to_Cl(cl1, st3))
+        {
+            cout << "Ученик добавлен!" << endl;
+            cout << endl;
+        }
+        else
+            cout << "Ученик не добавлен!" << endl;
+    }
+    else
+        cout << "Ученик не добавлен!" << endl;
+    cout << endl;
+
+    cout << endl;
+    cout << endl;
+    cout << endl;
+
+
+    cout << "Введите данные для второго класса" << endl;
+    inp_Class_(*cl2);
+    cout << endl;
+    out_Stud(st1, 1);
+    cout << "Добавить данного ученика в класс? (д - добавить, другой набор символов - нет): ";
+    str = "";
+    cin >> str;
+    if (str == "д")
+    {
+        if (add_St_to_Cl(*cl2, st1))
+        {
+            cout << "Ученик добавлен!" << endl;
+            cout << endl;
+        }
+        else
+            cout << "Ученик не добавлен!" << endl;
+    }
+    else
+        cout << "Ученик не добавлен!" << endl;
+    cout << endl;
+
+    cout << endl;
+    out_Stud(*st2, 1);
+    cout << "Добавить данного ученика в класс? (д - добавить, другой набор символов - нет): ";
+    str = "";
+    cin >> str;
+    if (str == "д")
+    {
+        if (add_St_to_Cl(*cl2, *st2))
+        {
+            cout << "Ученик добавлен!" << endl;
+            cout << endl;
+        }
+        else
+            cout << "Ученик не добавлен!" << endl;
+    }
+    else
+        cout << "Ученик не добавлен!" << endl;
+    cout << endl;
+
+    cout << endl;
+    out_Stud(st3, 1);
+    cout << "Добавить данного ученика в класс? (д - добавить, другой набор символов - нет): ";
+    str = "";
+    cin >> str;
+    if (str == "д")
+    {
+        if (add_St_to_Cl(*cl2, st3))
+        {
+            cout << "Ученик добавлен!" << endl;
+            cout << endl;
+        }
+        else
+            cout << "Ученик не добавлен!" << endl;
+    }
+    else
+        cout << "Ученик не добавлен!" << endl;
+    cout << endl;
+    cout << "===================================================" << endl;
+    
 
 }
