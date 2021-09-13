@@ -8,6 +8,7 @@
 
 using namespace std;
 
+// Структура Учитель
 struct Teacher
 {
     string Fam;             // Фамилия
@@ -15,17 +16,20 @@ struct Teacher
     string Otch;            // Отчество
 };
 
+// Структура Уроки
 struct Lessons
 {
     string Name;            // Название предмета
     Teacher Teach;          // Учитель
 };
 
+// Структура Оценка
 struct Mark
 {
     int Value;              // Оценка
 };
 
+// Структура Ученик
 struct Student
 {
     string Fam;             // Фамилия
@@ -36,6 +40,7 @@ struct Student
     int i;                  // Текущее кол-во уроков
 };
 
+// Структура Класс
 struct Class_
 {
     string Name;            // Название класса
@@ -43,7 +48,7 @@ struct Class_
     Student mas_Stud[32];   // Массив учеников
 };
 
-
+// Инициализация структуры Учитель
 void init_t(Teacher& t)
 {
     t.Fam  = "";
@@ -72,7 +77,7 @@ int out_Teach(Teacher& t)
     return 0;
 }
 
-
+// Инициализация структуры Уроки
 void init_l(Lessons& ls)
 {
     ls.Name = "";
@@ -101,11 +106,13 @@ int out_Less(Lessons& ls)
     return 0;
 }
 
+// Инициализация структуры Оценка
 void init_m(Mark& m)
 {
     m.Value = 0;
 }
 
+// Ввод данных в структуру Оценка
 int inp_Mark(Mark& m)
 {
     string mark;
@@ -117,6 +124,7 @@ int inp_Mark(Mark& m)
     return 0;
 }
 
+// Вывод данных из структуры
 int out_Mark(Mark& m)
 {
     cout << "Оценка: " << m.Value << endl;
@@ -124,6 +132,7 @@ int out_Mark(Mark& m)
     return 0;
 }
 
+// Инициализация структуры Ученик
 void init_s(Student& st)
 {
     st.Fam = "";
@@ -145,6 +154,7 @@ void init_s(Student& st)
     }
 }
 
+// Ввод данных в структуру Ученик
 int inp_Stud(Student &st, Mark *mas_m[20], Lessons *mas_l[20])
 {
     cout << "Введите Фамилию ученика: ";
@@ -167,6 +177,7 @@ int inp_Stud(Student &st, Mark *mas_m[20], Lessons *mas_l[20])
     return 0;
 }
 
+// Добавление к ученику урока
 int add_Less_to_Stud(Student& st, Lessons& ls)
 {
     int fl = 0;
@@ -183,6 +194,7 @@ int add_Less_to_Stud(Student& st, Lessons& ls)
     return fl;
 }
 
+// Добавление к ученику урока и оценки
 int add_LM_to_Stud(Student& st, Lessons& ls, Mark &m)
 {
     int fl = 0;
@@ -200,14 +212,27 @@ int add_LM_to_Stud(Student& st, Lessons& ls, Mark &m)
     return fl;
 }
 
-int add_Mark_to_Stud(Student& st, Mark &m, int n)
+// Добавление к ученику оценки к конкретному предмету
+int add_Mark_to_Stud(Student& st, Lessons& ls, Mark &m)
 {
     int fl = 0;
 
-    if (st.mas_Less[n].Name != "")
+    for (int i = 0; (i < 20) && (fl == 0); i++)
     {
-        st.mas_Marks[n] = m;
-        fl = 1;
+        if (st.mas_Less[i].Name == ls.Name)
+        {
+            if (st.mas_Less[i].Teach.Fam == ls.Teach.Fam)
+            {
+                if (st.mas_Less[i].Teach.Name == ls.Teach.Name)
+                {
+                    if (st.mas_Less[i].Teach.Otch == ls.Teach.Otch)
+                    {
+                        st.mas_Marks[i] = m;
+                        fl = 1;
+                    }
+                }
+            }
+        }
     }
 
     return fl;
@@ -245,7 +270,7 @@ int out_Stud(Student& st, int fl_out)
     return 0;
 }
 
-
+// Инициализация структуры Класс
 void init_c(Class_& cl)
 {
     cl.Name = "";
@@ -258,6 +283,7 @@ void init_c(Class_& cl)
     }
 }
 
+// Ввод данных в структуру Класс
 int inp_Class_(Class_ &cl, Student *mas[32])
 {
     cout << "Введите название класса: ";
@@ -275,6 +301,7 @@ int inp_Class_(Class_ &cl, Student *mas[32])
     return 0;
 }
 
+// Выод данных из структуры Класс
 // fl_out (0 или 1)
 int out_Class_(Class_& cl, int fl_out)
 {
