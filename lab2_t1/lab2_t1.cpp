@@ -345,16 +345,20 @@ int out_Class_(Class_& cl, int fl_out)
 
     if (fl_out == 0)
     {
-        for (int i = 0; i < 32; i++)
+        int i = 0;
+        while (cl.mas_Stud[i].Fam != "")
         {
             out_Stud(cl.mas_Stud[i], 0);
+            i++;
         }
     }
     else
     {
-        for (int i = 0; i < 32; i++)
+        int i = 0;
+        while (cl.mas_Stud[i].Fam != "")
         {
             out_Stud(cl.mas_Stud[i], 1);
+            i++;
         }
     }
 
