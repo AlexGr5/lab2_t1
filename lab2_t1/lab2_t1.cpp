@@ -415,6 +415,56 @@ int Best_Stud_inClass(Class_& cl)
     return exit;
 }
 
+// Функция по нахождению худших учеников в классе
+int Bed_Stud_inClass(Class_& cl)
+{
+    double mas_m[32];
+    int exit = 0;
+
+    for (int i = 0; i < 32; i++)
+    {
+        mas_m[i] = 0;
+    }
+
+    int i = 0;
+    int k = 0;
+    int sum = 0;
+    while (cl.mas_Stud[i].Fam != "")
+    {
+        int j = 0;
+        k = 0;
+        sum = 0;
+        while (cl.mas_Stud[i].mas_Less[j].Name != "")
+        {
+            sum += cl.mas_Stud[i].mas_Marks[j].Value;
+            k++;
+        }
+        mas_m[i] = double(sum) / k;
+        i++;
+    }
+
+    if (i == 0)
+        exit = -1;
+    else
+    {
+        double minM = 0;
+        minM = mas_m[0];
+        for (int j = 0; j < i; j++)
+        {
+            if (minM < mas_m[j])
+                minM = mas_m[j];
+        }
+
+        for (int j = 0; j < i; j++)
+        {
+            if (mas_m[j] == minM)
+                out_Stud(cl.mas_Stud[j], 1);
+        }
+    }
+
+    return exit;
+}
+
 int main()
 {
     setlocale(LC_ALL, "Russian");
@@ -867,7 +917,29 @@ int main()
     cout << endl;
     cout << endl;
 
+    cout << "************************Функция поиска лучших учеников в классе***************************" << endl;
+
+    cout << "Лучшие ученики класса №1:" << endl;
+    Best_Stud_inClass(cl1);
+    cout << endl;
+    cout << endl;
+    cout << "Лучшие ученики класса №2:" << endl;
+    Best_Stud_inClass(*cl2);
+
     cout << "***************************************************" << endl;
+
+    cout << endl;
+    cout << endl;
+    cout << endl;
+
+    cout << "************************Функция поиска худших учеников в классе***************************" << endl;
+
+    cout << "Худшие ученики класса №1:" << endl;
+    Bed_Stud_inClass(cl1);
+    cout << endl;
+    cout << endl;
+    cout << "Худшие ученики класса №2:" << endl;
+    Bed_Stud_inClass(*cl2);
 
     cout << "***************************************************" << endl;
 }
