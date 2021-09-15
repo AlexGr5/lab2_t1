@@ -361,6 +361,56 @@ int out_Class_(Class_& cl, int fl_out)
     return 0;
 }
 
+// Функция по нахождению лучших учеников в классе
+int Best_Stud_inClass(Class_& cl)
+{
+    double mas_m[32];
+    int exit = 0;
+
+    for (int i = 0; i < 32; i++)
+    {
+        mas_m[i] = 0;
+    }
+
+    int i = 0;
+    int k = 0;
+    int sum = 0;
+    while (cl.mas_Stud[i].Fam != "")
+    {
+        int j = 0;
+        k = 0;
+        sum = 0;
+        while (cl.mas_Stud[i].mas_Less[j].Name != "")
+        {
+            sum += cl.mas_Stud[i].mas_Marks[j].Value;
+            k++;
+        }
+        mas_m[i] = double(sum) / k;
+        i++;
+    }
+
+    if (i == 0)
+        exit = -1;
+    else
+    {
+        double maxM = 0;
+        maxM = mas_m[0];
+        for (int j = 0; j < i; j++)
+        {
+            if (maxM > mas_m[j])
+                maxM = mas_m[j];
+        }
+
+        for (int j = 0; j < i; j++)
+        {
+            if (mas_m[j] == maxM)
+                out_Stud(cl.mas_Stud[j], 1);
+        }
+    }
+
+    return exit;
+}
+
 int main()
 {
     setlocale(LC_ALL, "Russian");
@@ -808,6 +858,12 @@ int main()
     out_Class_(*cl2, 1);
 
     cout << "===================================================" << endl;
-    
 
+    cout << endl;
+    cout << endl;
+    cout << endl;
+
+    cout << "***************************************************" << endl;
+
+    cout << "***************************************************" << endl;
 }
