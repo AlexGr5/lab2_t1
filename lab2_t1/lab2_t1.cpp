@@ -388,6 +388,7 @@ int Best_Stud_inClass(Class_& cl)
         {
             sum += cl.mas_Stud[i].mas_Marks[j].Value;
             k++;
+            j++;
         }
         mas_m[i] = double(sum) / k;
         i++;
@@ -401,7 +402,7 @@ int Best_Stud_inClass(Class_& cl)
         maxM = mas_m[0];
         for (int j = 0; j < i; j++)
         {
-            if (maxM > mas_m[j])
+            if (maxM < mas_m[j])
                 maxM = mas_m[j];
         }
 
@@ -438,6 +439,7 @@ int Bed_Stud_inClass(Class_& cl)
         {
             sum += cl.mas_Stud[i].mas_Marks[j].Value;
             k++;
+            j++;
         }
         mas_m[i] = double(sum) / k;
         i++;
@@ -451,7 +453,7 @@ int Bed_Stud_inClass(Class_& cl)
         minM = mas_m[0];
         for (int j = 0; j < i; j++)
         {
-            if (minM < mas_m[j])
+            if (minM > mas_m[j])
                 minM = mas_m[j];
         }
 
@@ -840,7 +842,7 @@ int main()
         cout << "Ученик не добавлен!" << endl;
     cout << endl;
     cout << endl;
-    cout << "Вывод класаа №2" << endl;
+    cout << "Вывод класаа №1" << endl;
     out_Class_(cl1, 1);
 
     cout << endl;
